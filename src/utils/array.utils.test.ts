@@ -1,4 +1,4 @@
-import { insertIf, isExternalLink } from './array.utils'
+import { insertIf, isExternalLink, isInternalLink } from './array.utils'
 
 describe('insertIf()', () => {
   it.each([
@@ -26,5 +26,23 @@ describe('isExternalLink()', () => {
   it('should return false for non-external links', () => {
     expect(isExternalLink('/path/to/page')).toBe(false)
     expect(isExternalLink('example.com')).toBe(false)
+  })
+})
+describe('isInternalLink()', () => {
+  it('should return true for internal links starting with "/"', () => {
+    expect(isInternalLink('/path/to/page')).toBe(true)
+    expect(isInternalLink('/#section')).toBe(true)
+  })
+
+  it('should return false for external links', () => {
+    expect(isInternalLink('http://example.com')).toBe(false)
+    expect(isInternalLink('https://example.com')).toBe(false)
+    expect(isInternalLink('www.example.com')).toBe(false)
+  })
+
+  it('should return false for non-link strings', () => {
+    expect(isInternalLink('example.com')).toBe(false)
+    expect(isInternalLink('123')).toBe(false)
+    expect(isInternalLink('')).toBe(false)
   })
 })
