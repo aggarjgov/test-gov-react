@@ -23,18 +23,24 @@ describe('Hr', () => {
   it('applies the "govuk-section-break--medium" class when size prop is set to "medium"', () => {
     render(<Hr size="medium" />)
     const hrElement = screen.getByRole('separator')
-    expect(hrElement).toHaveClass('govuk-section-break--medium')
+    expect(hrElement).toHaveClass(
+      'govuk-section-break govuk-section-break--m govuk-section-break--visible'
+    )
   })
 
   it('applies the "govuk-section-break--large" class when size prop is set to "large"', () => {
     render(<Hr size="large" />)
     const hrElement = screen.getByRole('separator')
-    expect(hrElement).toHaveClass('govuk-section-break--large')
+    expect(hrElement).toHaveClass(
+      'govuk-section-break govuk-section-break--l govuk-section-break--visible'
+    )
   })
 
   it('applies the "govuk-section-break--extra-large" class when size prop is set to "extra-large"', () => {
     render(<Hr size="extra-large" />)
     const hrElement = screen.getByRole('separator')
-    expect(hrElement).toHaveClass('govuk-section-break--extra-large')
+    expect(hrElement).toHaveClass(
+      'govuk-section-break govuk-section-break--xl govuk-section-break--visible'
+    )
   })
 })
