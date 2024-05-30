@@ -1,4 +1,4 @@
-import { insertIf, isInternalLink } from '../utils/array.utils'
+import { containsArray, insertIf, isInternalLink } from '../utils/array.utils'
 
 describe('insertIf', () => {
   it('should return an empty array if the condition is false', () => {
@@ -42,4 +42,20 @@ describe('isInternalLink', () => {
     const result = isInternalLink('')
     expect(result).toBe(false)
   })
+})
+
+describe('containsArray', () => {
+  it.each([
+    [['admin', 'user'], [['admin'], ['user']], false],
+    [['user'], [['admin']], false],
+    [['admin'], [['admin', 'user']], false],
+    [['admin'], [['user']], false],
+    [['admin', 'user'], [['admin', 'user']], true],
+    [['admin', 'user'], [['admin'], ['user'], ['admin', 'user']], true],
+  ])(
+    'should return the correct error message if the user has incorrect role',
+    (userRoles, allowedRoles, errorMessage) => {
+      expect(containsArray(userRoles, allowedRoles)).toBe(errorMessage)
+    }
+  )
 })
